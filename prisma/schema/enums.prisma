@@ -1,6 +1,7 @@
 enum Role {
     SUPER_ADMIN
-    SUPER_ADMINDOCTOR
+    ADMIN
+    DOCTOR
     PATIENT
 }
 
