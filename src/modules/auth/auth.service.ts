@@ -388,10 +388,15 @@ const googleLoginService = async (payload: IGoogleLoginPayload) => {
   };
 };
 
+const forgotPaswordService = (payload: any) => {};
+const resetPaswordService = (payload: any) => {};
+
 export const authServices = {
   registerUserService,
   loginUserService,
   getMyProfileService,
   refreshTokenService,
   googleLoginService,
+  forgotPaswordService,
+  resetPaswordService,
 };

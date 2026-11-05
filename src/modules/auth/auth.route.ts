@@ -14,5 +14,8 @@ router.get("/me",authControllers.getMyProfile)
 router.post("/refresh-token",authControllers.refreshToken)
 router.post("/google",authControllers.googleLogin)
 
+router.post("/forgot-password",validateRequest(UserValidation.ForgotPasswordZodSchema),authControllers.forgotPassword)
+router.post("/reset-password",validateRequest(UserValidation.ResetPasswordZodSchema),authControllers.resetPassword)
+
 
 export const authRoutes = router
