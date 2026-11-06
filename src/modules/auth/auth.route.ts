@@ -2,13 +2,15 @@ import { Router } from "express";
 import { authControllers } from "./auth.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { UserValidation } from "./auth.validation";
+import { auth } from "../../middlewares/checkAuth";
+import { Role } from "../../../generated/prisma/enums";
 
 const router = Router()
 
 
 router.post("/register",validateRequest(UserValidation.UserRegistrationZodSchema),authControllers.registerUser)
 router.post("/login",validateRequest(UserValidation.LoginZodSchema),authControllers.loginUser)
-router.get("/me",authControllers.getMyProfile)
+router.get("/me",auth(Role.SUPER_ADMIN,Role.ADMIN,Role.DOCTOR,Role.PATIENT),authControllers.getMyProfile)
 
 
 router.post("/refresh-token",authControllers.refreshToken)

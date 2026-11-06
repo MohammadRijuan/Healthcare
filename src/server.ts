@@ -3,6 +3,7 @@ import config from "./config";
 import { prisma } from "./lib/prisma";
 import { redisClient } from "./lib/redis";
 import { seedSuperAdmin, seedTesterAdmin, seedTesterDoctor } from "./utils/seed";
+import { transporter } from "./lib/nodemailer";
 
 const PORT = config.port;
 
@@ -13,6 +14,9 @@ async function main() {
 
 		await redisClient.connect()
 		console.log("redis connected successfully")
+
+		await transporter.verify();
+		console.log("nodemailer is connected")
 
 		seedSuperAdmin();
 		seedTesterAdmin();
