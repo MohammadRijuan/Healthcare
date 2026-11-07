@@ -6,16 +6,16 @@ import httpStatus from "http-status";
 import { IRequestUser } from "./auth.interface";
 import z, { string } from "zod";
 
-const UserRegisterSchemaZod = z.object({
-  name: z.string(),
-  email: z.email(),
-  password: z.string(),
-  patient: z
-    .object({
-      contactNumber: string().optional(),
-    })
-    .optional(),
-});
+// const UserRegisterSchemaZod = z.object({
+//   name: z.string(),
+//   email: z.email(),
+//   password: z.string(),
+//   patient: z
+//     .object({
+//       contactNumber: string().optional(),
+//     })
+//     .optional(),
+// });
 
 const registerUser = catchAsync(async (req: Request, res: Response) => {
   // const payload = PatientValidation.PatientRegistrationZodSchema.safeParse(req.body);
@@ -31,7 +31,42 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
 
   const payload = req.body;
 
-  const result = await authServices.registerUserService(payload);
+  await authServices.registerUserService(payload);
+
+  // const { accessToken, refreshToken, user, patient } = result;
+
+  // res.cookie("accessToken", accessToken, {
+  //   httpOnly: true,
+  //   secure: false,
+  //   sameSite: "none",
+  //   maxAge: 10000 * 60 * 60 * 24, //24 hour or 1day
+  // });
+
+  // res.cookie("refreshToken", refreshToken, {
+  //   httpOnly: true,
+  //   secure: false,
+  //   sameSite: "none",
+  //   maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+  // });
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Otp has sent to your email to verify",
+    // data: {
+    //   accessToken,
+    //   refreshToken,
+    //   user,
+    //   patient,
+    // },
+    data: null,
+  });
+});
+
+const verifyUserEmail = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const result = await authServices.verifyUserEmailService(payload);
 
   const { accessToken, refreshToken, user, patient } = result;
 
@@ -39,9 +74,8 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
     httpOnly: true,
     secure: false,
     sameSite: "none",
-    maxAge: 10000 * 60 * 60 * 24, //24 hour or 1day
+    maxAge: 1000 * 60 * 60 * 24, // 24 hour or 1 day
   });
-
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
@@ -52,7 +86,7 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: "Patient registered successfully",
+    message: "Email Verified Successfully",
     data: {
       accessToken,
       refreshToken,
@@ -85,7 +119,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: "Patient registered successfully",
+    message: "user logged in successfully",
     data: {
       accessToken,
       refreshToken,
@@ -208,4 +242,5 @@ export const authControllers = {
   googleLogin,
   forgotPassword,
   resetPassword,
+  verifyUserEmail,
 };
