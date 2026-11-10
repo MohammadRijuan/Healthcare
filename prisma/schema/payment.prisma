@@ -1,0 +1,31 @@
+model Payment {
+  id String @id @default(uuid())
+
+  status PaymentStatus @default(UNPAID)
+
+  amount   Decimal @db.Decimal(10, 2)
+  currency String  @default("BDT")
+
+  paymentGateway        String @default("bkash") // right now bkash...if there are multiple method then it will be switched into enums
+  merchantInvoiceNumber String @unique // appointment id
+
+  bkashPaymentId String? @unique
+  bkashTrxId     String?
+  payerReference String? //user email / phone number
+  paidAt         String? // it will be string because there is no GMT method in DateTime
+
+  gatewayResponse Json? // will provide whole response as record so that it helps us to check in detail
+
+  refundTrxId  String?
+  refundAmount Decimal? @db.Decimal(10, 2)
+  refundReason String?
+  refundedAt   String?
+
+  appointmentId String      @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("payments")
+}
