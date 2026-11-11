@@ -14,6 +14,7 @@ import { userRoutes } from "./modules/user/user.route";
 import { getBkashIdToken } from "./lib/bkash";
 import  httpStatus from "http-status"
 import { appointementRoutes } from "./modules/appointment/appointment.route";
+import { doctorRoutes } from "./modules/doctor/doctor.route";
 
 const app: Application = express();
 
@@ -38,6 +39,8 @@ app.use("/api/v1/auth",authRoutes)
 app.use("/api/v1/user", userRoutes);
 
 app.use("/api/v1/appointment", appointementRoutes);
+
+app.use("/api/v1/doctor", doctorRoutes);
 
 
 // testing
