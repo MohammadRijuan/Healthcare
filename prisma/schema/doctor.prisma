@@ -11,7 +11,7 @@ model Doctor {
   experienceYears Int
 
   bio            String?
-  consultaionFee Decimal? @db.Decimal(10, 2)
+  consultationFee Decimal? @db.Decimal(10, 2)
 
   contactNumber String?
 
