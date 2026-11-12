@@ -1,5 +1,7 @@
 import config from "../config";
+import httpStatus from "http-status";
 import { redisClient } from "./redis";
+import { AppError } from "../utils/AppError";
 
 export const getBkashIdToken = async () => {
   try {
@@ -56,7 +58,10 @@ export const getBkashIdToken = async () => {
 
       // Stop execution if bKash rejects the refresh request
       if (!refreshTokenResponse.ok) {
-        throw new Error("Bkash Access Token Refresh Failed");
+        throw new AppError(
+          httpStatus.BAD_GATEWAY,
+          "Bkash Access Token Refresh Failed",
+        );
       }
 
       // Convert the API response into a JavaScript object
@@ -109,7 +114,10 @@ export const getBkashIdToken = async () => {
 
     // Stop execution if bKash rejects the token grant request
     if (!response.ok) {
-      throw new Error("Bkash Access Token Grant Failed");
+      throw new AppError(
+        httpStatus.BAD_GATEWAY,
+        "Bkash Access Token Grant Failed",
+      );
     }
 
     // Convert the API response into a JavaScript object
@@ -135,8 +143,15 @@ export const getBkashIdToken = async () => {
     bkashIdToken = result.id_token;
 
     return bkashIdToken;
-  } catch (error: any) {
+  } catch (error) {
     // Forward the error to the calling function
-    throw new Error(error.message);
+    if (error instanceof AppError) {
+      throw error;
+    }
+
+    throw new AppError(
+      httpStatus.BAD_GATEWAY,
+      error instanceof Error ? error.message : "bKash token operation failed",
+    );
   }
 };

@@ -4,6 +4,7 @@ import { authServices } from "./auth.service";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
 import { IRequestUser } from "./auth.interface";
+import { AppError } from "../../utils/AppError";
 import z, { string } from "zod";
 
 // const UserRegisterSchemaZod = z.object({
@@ -131,7 +132,10 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
   const user = req.user as unknown as IRequestUser;
 
   if (!user) {
-    throw new Error("user information is missing in the request");
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      "user information is missing in the request",
+    );
   }
 
   const result = await authServices.getMyProfileService(user);
@@ -146,7 +150,7 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   if (!req.cookies.refreshToken) {
-    throw new Error("Refresh token is missing");
+    throw new AppError(httpStatus.UNAUTHORIZED, "Refresh token is missing");
   }
   const result = await authServices.refreshTokenService(
     req.cookies.refreshToken,

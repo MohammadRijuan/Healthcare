@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRoutes = void 0;
+const express_1 = require("express");
+const auth_controller_1 = require("./auth.controller");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const auth_validation_1 = require("./auth.validation");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = (0, express_1.Router)();
+router.post("/register", (0, validateRequest_1.validateRequest)(auth_validation_1.UserValidation.UserRegistrationZodSchema), auth_controller_1.authControllers.registerUser);
+router.post("/verify-email", (0, validateRequest_1.validateRequest)(auth_validation_1.UserValidation.UserEmailVerifyZodSchema), auth_controller_1.authControllers.verifyUserEmail);
+router.post("/login", (0, validateRequest_1.validateRequest)(auth_validation_1.UserValidation.LoginZodSchema), auth_controller_1.authControllers.loginUser);
+router.get("/me", (0, checkAuth_1.auth)(enums_1.Role.SUPER_ADMIN, enums_1.Role.ADMIN, enums_1.Role.DOCTOR, enums_1.Role.PATIENT), auth_controller_1.authControllers.getMyProfile);
+router.post("/refresh-token", auth_controller_1.authControllers.refreshToken);
+router.post("/google", auth_controller_1.authControllers.googleLogin);
+router.post("/forgot-password", (0, validateRequest_1.validateRequest)(auth_validation_1.UserValidation.ForgotPasswordZodSchema), auth_controller_1.authControllers.forgotPassword);
+router.post("/reset-password", (0, validateRequest_1.validateRequest)(auth_validation_1.UserValidation.ResetPasswordZodSchema), auth_controller_1.authControllers.resetPassword);
+exports.authRoutes = router;
+//# sourceMappingURL=auth.route.js.map

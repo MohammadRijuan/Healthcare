@@ -1,0 +1,168 @@
+import { DoctorVerificationStatus, Role } from "../../../generated/prisma/enums";
+import { IApplyAsDoctorPayload, IApproveDoctorPayload, IVerifyDoctorEmailPayload } from "./doctor.interface";
+import { RequestUser } from "../../middlewares/checkAuth";
+import { IQuery } from "../../interfaces";
+declare const applyAsDoctor: (payload: IApplyAsDoctorPayload, resume: Express.Multer.File | null, //single file
+additionalFiles: Express.Multer.File[]) => Promise<{
+    doctor: {
+        id: string;
+        name: string;
+        email: string;
+        address: string | null;
+        specialization: string;
+        licenseNumber: string;
+        qualifications: string;
+        experienceYears: number;
+        bio: string | null;
+        consultationFee: import("@prisma/client-runtime-utils").Decimal | null;
+        contactNumber: string | null;
+        verificationStatus: DoctorVerificationStatus;
+        rejectionReason: string | null;
+        reviewedBy: string | null;
+        reviewedAt: Date | null;
+        resume: string | null;
+        resumePublicId: string | null;
+        additionalFiles: import("@prisma/client/runtime/client").JsonValue | null;
+        isDeleted: boolean;
+        deletedAt: Date;
+        userId: string;
+    } | null;
+} & {
+    id: string;
+    name: string;
+    email: string;
+    password: string | null;
+    googleId: string | null;
+    emailVerified: boolean;
+    role: Role;
+    authProvider: import("../../../generated/prisma/enums").AuthProvider;
+    status: import("../../../generated/prisma/enums").UserStatus;
+    needPasswordChange: boolean;
+    imageUrl: string;
+    imagePublicId: string;
+    isDeleted: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+}>;
+declare const verifyDoctorEmailService: (payload: IVerifyDoctorEmailPayload) => Promise<{
+    doctor: {
+        id: string;
+        name: string;
+        email: string;
+        address: string | null;
+        specialization: string;
+        licenseNumber: string;
+        qualifications: string;
+        experienceYears: number;
+        bio: string | null;
+        consultationFee: import("@prisma/client-runtime-utils").Decimal | null;
+        contactNumber: string | null;
+        verificationStatus: DoctorVerificationStatus;
+        rejectionReason: string | null;
+        reviewedBy: string | null;
+        reviewedAt: Date | null;
+        resume: string | null;
+        resumePublicId: string | null;
+        additionalFiles: import("@prisma/client/runtime/client").JsonValue | null;
+        isDeleted: boolean;
+        deletedAt: Date;
+        userId: string;
+    } | null;
+} & {
+    id: string;
+    name: string;
+    email: string;
+    googleId: string | null;
+    emailVerified: boolean;
+    role: Role;
+    authProvider: import("../../../generated/prisma/enums").AuthProvider;
+    status: import("../../../generated/prisma/enums").UserStatus;
+    needPasswordChange: boolean;
+    imageUrl: string;
+    imagePublicId: string;
+    isDeleted: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+}>;
+declare const approveDoctorService: (payload: IApproveDoctorPayload, reviewer: RequestUser) => Promise<{
+    id: string;
+    name: string;
+    email: string;
+    address: string | null;
+    specialization: string;
+    licenseNumber: string;
+    qualifications: string;
+    experienceYears: number;
+    bio: string | null;
+    consultationFee: import("@prisma/client-runtime-utils").Decimal | null;
+    contactNumber: string | null;
+    verificationStatus: DoctorVerificationStatus;
+    rejectionReason: string | null;
+    reviewedBy: string | null;
+    reviewedAt: Date | null;
+    resume: string | null;
+    resumePublicId: string | null;
+    additionalFiles: import("@prisma/client/runtime/client").JsonValue | null;
+    isDeleted: boolean;
+    deletedAt: Date;
+    userId: string;
+}>;
+declare const getAllDoctorsService: (query: IQuery) => Promise<{
+    data: ({
+        user: {
+            id: string;
+            name: string;
+            email: string;
+            googleId: string | null;
+            emailVerified: boolean;
+            role: Role;
+            authProvider: import("../../../generated/prisma/enums").AuthProvider;
+            status: import("../../../generated/prisma/enums").UserStatus;
+            needPasswordChange: boolean;
+            imageUrl: string;
+            imagePublicId: string;
+            isDeleted: boolean;
+            deletedAt: Date | null;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+    } & {
+        id: string;
+        name: string;
+        email: string;
+        address: string | null;
+        specialization: string;
+        licenseNumber: string;
+        qualifications: string;
+        experienceYears: number;
+        bio: string | null;
+        consultationFee: import("@prisma/client-runtime-utils").Decimal | null;
+        contactNumber: string | null;
+        verificationStatus: DoctorVerificationStatus;
+        rejectionReason: string | null;
+        reviewedBy: string | null;
+        reviewedAt: Date | null;
+        resume: string | null;
+        resumePublicId: string | null;
+        additionalFiles: import("@prisma/client/runtime/client").JsonValue | null;
+        isDeleted: boolean;
+        deletedAt: Date;
+        userId: string;
+    })[];
+    meta: {
+        page: number;
+        limit: number;
+        total: number;
+        totalPages: number;
+    };
+}>;
+export declare const doctorServices: {
+    applyAsDoctor: typeof applyAsDoctor;
+    verifyDoctorEmailService: typeof verifyDoctorEmailService;
+    approveDoctorService: typeof approveDoctorService;
+    getAllDoctorsService: typeof getAllDoctorsService;
+};
+export {};
+//# sourceMappingURL=doctor.service.d.ts.map

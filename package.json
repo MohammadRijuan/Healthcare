@@ -45,6 +45,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.5.0",
+    "node-cron": "^4.6.0",
     "nodemailer": "^10.3.1",
     "pg": "^8.23.1",
     "redis": "^6.3.1",
