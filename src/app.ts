@@ -15,7 +15,8 @@ import { getBkashIdToken } from "./lib/bkash";
 import  httpStatus from "http-status"
 import { appointementRoutes } from "./modules/appointment/appointment.route";
 import { doctorRoutes } from "./modules/doctor/doctor.route";
-import { scheduleRoutes } from "./modules/schedule/schedule.validation";
+import { scheduleRoutes } from "./modules/schedule/schedule.route";
+
 
 const app: Application = express();
 
