@@ -1,4 +1,4 @@
-import { Role } from "../../generated/prisma/enums";
+import { DoctorVerificationStatus, Role } from "../../generated/prisma/enums";
 import httpStatus from "http-status";
 import config from "../config";
 import { prisma } from "../lib/prisma";
@@ -150,7 +150,8 @@ export const seedTesterDoctor = async () => {
             experienceYears: 5,
             licenseNumber:"BMDC0000",
             qualifications:"MBBS",
-            specialization:"Gynocologist"
+            specialization:"Gynocologist",
+            verificationStatus: DoctorVerificationStatus.APPROVED
           }
         }
       },

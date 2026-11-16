@@ -23,6 +23,10 @@ const createScheduleService = async (
     throw new AppError(httpStatus.NOT_FOUND, "Doctor Profile Not Found");
   }
 
+  if (doctor.verificationStatus !== "APPROVED") {
+    throw new AppError(httpStatus.NOT_FOUND, "Wait for the approval of verification to create your schedule");
+  }
+
   // 25 August => start Time  : 9:00 PM
   // 26 August => end Time : 3:00AM
 

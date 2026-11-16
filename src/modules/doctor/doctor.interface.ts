@@ -1,6 +1,5 @@
 import { DoctorVerificationStatus } from "../../../generated/prisma/enums";
 
-
 export interface IApplyAsDoctorPayload {
     user: {
         name: string;
@@ -29,4 +28,11 @@ export interface IApproveDoctorPayload {
     doctorId: string;
     verificationStatus: DoctorVerificationStatus;
     rejectionReason: string;
+}
+
+export interface IUpdateDoctorProfilePayload {
+    address?: string;
+    bio?: string;
+    consultationFee?: number;
+    contactNumber?: string;
 }

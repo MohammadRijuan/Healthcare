@@ -16,6 +16,9 @@ import  httpStatus from "http-status"
 import { appointementRoutes } from "./modules/appointment/appointment.route";
 import { doctorRoutes } from "./modules/doctor/doctor.route";
 import { scheduleRoutes } from "./modules/schedule/schedule.route";
+import { paymentRoutes } from "./modules/payment/payment.route";
+import { prescriptionRoutes } from "./modules/prescription/prescription.route";
+import { AnalyticsRoutes } from "./modules/analytics/analytics.route";
 
 
 const app: Application = express();
@@ -45,6 +48,12 @@ app.use("/api/v1/appointment", appointementRoutes);
 app.use("/api/v1/doctor", doctorRoutes);
 
 app.use("/api/v1/schedule", scheduleRoutes);
+
+app.use("/api/v1/payment", paymentRoutes);
+
+app.use("/api/v1/prescription", prescriptionRoutes);
+
+app.use("/api/v1/analytics", AnalyticsRoutes);
 
 
 
