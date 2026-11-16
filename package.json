@@ -20,6 +20,7 @@
     "@biomejs/biome": "2.6.4",
     "@types/multer": "^2.3.0",
     "@types/node": "^26.6.6",
+    "@types/pdfkit": "^0.17.7",
     "@types/pg": "^8.23.1",
     "prisma": "^7.10.1",
     "tsx": "^4.23.15",
@@ -49,6 +50,7 @@
     "multer": "^2.5.0",
     "node-cron": "^4.6.0",
     "nodemailer": "^10.3.1",
+    "pdfkit": "^0.20.2",
     "pg": "^8.23.1",
     "redis": "^6.3.1",
     "zod": "^4.6.7"

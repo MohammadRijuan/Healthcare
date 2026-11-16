@@ -44,7 +44,7 @@ app.use("/api/v1/appointment", appointementRoutes);
 
 app.use("/api/v1/doctor", doctorRoutes);
 
-app.use("/api/v1/doctor", scheduleRoutes);
+app.use("/api/v1/schedule", scheduleRoutes);
 
 
 
