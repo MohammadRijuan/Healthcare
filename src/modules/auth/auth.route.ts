@@ -19,6 +19,7 @@ router.post("/google",authControllers.googleLogin)
 
 router.post("/forgot-password",validateRequest(UserValidation.ForgotPasswordZodSchema),authControllers.forgotPassword)
 router.post("/reset-password",validateRequest(UserValidation.ResetPasswordZodSchema),authControllers.resetPassword)
+router.post("/logout",validateRequest(UserValidation.ResetPasswordZodSchema),authControllers.logout)
 
 
 export const authRoutes = router

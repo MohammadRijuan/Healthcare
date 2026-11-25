@@ -60,24 +60,24 @@ app.use("/api/v1/analytics", AnalyticsRoutes);
 
 // testing
 
-app.get("/test", async (req: Request, res: Response, next : NextFunction) => {
+// app.get("/test", async (req: Request, res: Response, next : NextFunction) => {
 
-	try {
+// 	try {
 
-		const grantIdTokenResult = await getBkashIdToken()
+// 		const grantIdTokenResult = await getBkashIdToken()
 
-		console.log(grantIdTokenResult);
+// 		console.log(grantIdTokenResult);
 		
-		res.status(httpStatus.OK).json({
-			success: true,
-			message: "Welcome to PH Healthcare System Backend",
-			data : null
-		});
-	} catch (error) {
-		console.log(error);
-		next(error)
-	}
-})
+// 		res.status(httpStatus.OK).json({
+// 			success: true,
+// 			message: "Welcome to PH Healthcare System Backend",
+// 			data : null
+// 		});
+// 	} catch (error) {
+// 		console.log(error);
+// 		next(error)
+// 	}
+// })
 
 
 
